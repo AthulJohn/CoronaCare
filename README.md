@@ -1,6 +1,7 @@
 # coronaweb
 
 A new Flutter project.
+THE PROJECT IS STILL NOT FINISHED FOR ALL WINDOW SIZES, PLEASE RUN ON A 1036*1036 WINDOW.
 
 ## Getting Started
 

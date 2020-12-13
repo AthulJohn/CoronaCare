@@ -13,6 +13,10 @@ void main() {
   runApp(MyApp());
 }
 
+double w(double val, context) {
+  return val * MediaQuery.of(context).size.width / 1036;
+}
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -162,7 +166,7 @@ develop serious illness.''',
                                         Text('Till now...',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 25)),
+                                                fontSize: w(25, context))),
                                         SizedBox(height: 20),
                                         Container(
                                             height: MediaQuery.of(context)
@@ -195,7 +199,7 @@ develop serious illness.''',
                                               'So how can we Protect ourselves...',
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 25)))),
+                                                  fontSize: w(25, context))))),
                                 ),
                               )
                             ],
@@ -203,21 +207,32 @@ develop serious illness.''',
                         ),
                       ),
                       Positioned(
-                          bottom: scrolldata.sc < 1900
-                              ? //MediaQuery.of(context).size.height -
-                              scrolldata.sc - 1700
+                          bottom: scrolldata.sc < 1900 || scrolldata.sc > 2900
+                              ? scrolldata.sc < 1900
+                                  ? //MediaQuery.of(context).size.height -
+                                  scrolldata.sc - 1700
+                                  : scrolldata.sc - 2700
                               : 200,
-                          right: scrolldata.sc < 1900
+                          right: scrolldata.sc < 1900 || scrolldata.sc > 2900
                               ? //MediaQuery.of(context).size.height -
-                              scrolldata.sc - 1700
-                              : 200,
-                          left: scrolldata.sc < 1900
+                              scrolldata.sc < 1900
+                                  ? //MediaQuery.of(context).size.height -
+                                  w(scrolldata.sc - 1700, context)
+                                  : w(scrolldata.sc - 2700, context)
+                              : w(200, context),
+                          left: scrolldata.sc < 1900 || scrolldata.sc > 2900
                               ? //MediaQuery.of(context).size.height -
-                              scrolldata.sc - 1700
-                              : 200,
-                          top: scrolldata.sc < 1900
+                              scrolldata.sc < 1900
+                                  ? //MediaQuery.of(context).size.height -
+                                  w(scrolldata.sc - 1700, context)
+                                  : w(scrolldata.sc - 2700, context)
+                              : w(200, context),
+                          top: scrolldata.sc < 1900 || scrolldata.sc > 2900
                               ? //MediaQuery.of(context).size.height -
-                              scrolldata.sc - 1700
+                              scrolldata.sc < 1900
+                                  ? //MediaQuery.of(context).size.height -
+                                  scrolldata.sc - 1700
+                                  : scrolldata.sc - 2700
                               : 200,
                           child: AnimatedOpacity(
                               duration: Duration(milliseconds: 1500),
@@ -230,9 +245,12 @@ develop serious illness.''',
                                 image: AssetImage('assets/window.png'),
                               ))),
                       Positioned(
-                          top: scrolldata.sc < 1900
-                              ? MediaQuery.of(context).size.height -
-                                  (scrolldata.sc - 1700)
+                          top: scrolldata.sc < 1900 || scrolldata.sc > 2400
+                              ? scrolldata.sc < 1900
+                                  ? MediaQuery.of(context).size.height -
+                                      (scrolldata.sc - 1700)
+                                  : MediaQuery.of(context).size.height -
+                                      (scrolldata.sc - 2200)
                               : MediaQuery.of(context).size.height - 200,
                           bottom: 0,
                           left: 0,
@@ -241,9 +259,12 @@ develop serious illness.''',
                             color: Colors.white,
                           )),
                       Positioned(
-                          bottom: scrolldata.sc < 1900
-                              ? MediaQuery.of(context).size.height -
-                                  (scrolldata.sc - 1700)
+                          bottom: scrolldata.sc < 1900 || scrolldata.sc > 2400
+                              ? scrolldata.sc < 1900
+                                  ? MediaQuery.of(context).size.height -
+                                      (scrolldata.sc - 1700)
+                                  : MediaQuery.of(context).size.height -
+                                      (scrolldata.sc - 2200)
                               : MediaQuery.of(context).size.height - 200,
                           top: 0,
                           left: 0,
@@ -254,10 +275,18 @@ develop serious illness.''',
                       Positioned(
                           top: 0,
                           bottom: 0,
-                          left: scrolldata.sc < 1900
-                              ? MediaQuery.of(context).size.width -
-                                  (scrolldata.sc - 1570)
-                              : MediaQuery.of(context).size.width - 340,
+                          left: scrolldata.sc < 1900 || scrolldata.sc > 2400
+                              ? scrolldata.sc < 1900
+                                  ? w(
+                                      MediaQuery.of(context).size.width -
+                                          (scrolldata.sc - 1570),
+                                      context)
+                                  : w(
+                                      MediaQuery.of(context).size.width -
+                                          (scrolldata.sc - 2070),
+                                      context)
+                              : w(MediaQuery.of(context).size.width - 340,
+                                  context),
                           right: 0,
                           child: Container(
                             color: Colors.white,
@@ -265,14 +294,14 @@ develop serious illness.''',
                               child: AnimatedOpacity(
                                   duration: Duration(milliseconds: 1500),
                                   opacity: scrolldata.sc >= 2000 &&
-                                          scrolldata.sc <= 2400
+                                          scrolldata.sc <= 2200
                                       ? 1.0
                                       : scrolldata.sc <= 1850 ||
-                                              scrolldata.sc >= 2550
+                                              scrolldata.sc >= 2350
                                           ? 0.0
                                           : scrolldata.sc < 2000
                                               ? (scrolldata.sc - 1850) / 150
-                                              : (2550 - scrolldata.sc) / 150,
+                                              : (2350 - scrolldata.sc) / 150,
                                   child: Padding(
                                     padding: const EdgeInsets.all(13.0),
                                     child: Text(
@@ -290,190 +319,233 @@ develop serious illness.''',
                           top: 0,
                           bottom: 0,
                           left: 0,
-                          right: scrolldata.sc < 1900
-                              ? MediaQuery.of(context).size.width -
-                                  (scrolldata.sc - 1570)
-                              : MediaQuery.of(context).size.width - 340,
+                          right: scrolldata.sc < 1900 || scrolldata.sc > 2400
+                              ? scrolldata.sc < 1900
+                                  ? w(
+                                      MediaQuery.of(context).size.width -
+                                          (scrolldata.sc - 1570),
+                                      context)
+                                  : w(
+                                      MediaQuery.of(context).size.width -
+                                          (scrolldata.sc - 2070),
+                                      context)
+                              : w(MediaQuery.of(context).size.width - 340,
+                                  context),
                           child: Container(
                             color: Colors.white,
                             child: Center(
                               child: AnimatedOpacity(
                                   duration: Duration(milliseconds: 1500),
                                   opacity: scrolldata.sc >= 2000 &&
-                                          scrolldata.sc <= 2400
+                                          scrolldata.sc <= 2200
                                       ? 1.0
                                       : scrolldata.sc <= 1850 ||
-                                              scrolldata.sc >= 2550
+                                              scrolldata.sc >= 2350
                                           ? 0.0
                                           : scrolldata.sc < 2000
                                               ? (scrolldata.sc - 1850) / 150
-                                              : (2550 - scrolldata.sc) / 150,
+                                              : (2350 - scrolldata.sc) / 150,
                                   child: Text(" Stay \n Indoors",
                                       style: TextStyle(fontSize: 60))),
                             ),
                           )),
                       BackdropFilter(
                           filter: ImageFilter.blur(
-                              sigmaX: scrolldata.sc < 2500
+                              sigmaX: scrolldata.sc < 2400
                                   ? 0
-                                  : scrolldata.sc < 2800
-                                      ? (scrolldata.sc - 2500) / 50
+                                  : scrolldata.sc < 2700
+                                      ? (scrolldata.sc - 2400) / 50
                                       : 6,
-                              sigmaY: scrolldata.sc < 2500
+                              sigmaY: scrolldata.sc < 2400
                                   ? 0
-                                  : scrolldata.sc < 2800
-                                      ? (scrolldata.sc - 2500) / 50
+                                  : scrolldata.sc < 2700
+                                      ? (scrolldata.sc - 2400) / 50
                                       : 6),
                           child: Stack(
                             children: [
                               Positioned(
-                                  bottom: scrolldata.sc < 1900
-                                      ? MediaQuery.of(context).size.height -
-                                          (scrolldata.sc - 1700)
-                                      : MediaQuery.of(context).size.height -
-                                          200,
+                                  bottom: scrolldata.sc < 2800
+                                      ? -3100 + scrolldata.sc
+                                      : scrolldata.sc >= 3100
+                                          ? -3400 + scrolldata.sc
+                                          : -300,
                                   top: 0,
-                                  left: 0,
+                                  left: scrolldata.sc < 2800
+                                      ? w(-3100 + scrolldata.sc, context)
+                                      : scrolldata.sc >= 3100
+                                          ? w(-3400 + scrolldata.sc, context)
+                                          : w(-300, context),
                                   right: 0,
                                   child: Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image:
-                                                AssetImage('assets/hands.gif'),
-                                            fit: BoxFit.contain)),
+                                    // constraints: BoxConstraints(
+                                    //   maxHeight: scrolldata.sc < 2400
+                                    //       ? 400
+                                    //       : 400 * (2800 - scrolldata.sc) / 400,
+                                    //   maxWidth: scrolldata.sc < 2400
+                                    //       ? 200
+                                    //       : 200 * (2600 - scrolldata.sc) / 200,
+                                    // ),
+                                    child: Center(
+                                        child: new Image.asset(
+                                      'assets/hands.gif',
+                                      width: scrolldata.sc < 2600
+                                          ? w(500, context)
+                                          : scrolldata.sc < 2800
+                                              ? w(3100 - scrolldata.sc, context)
+                                              : scrolldata.sc >= 3100
+                                                  ? w(3400 - scrolldata.sc,
+                                                      context)
+                                                  : w(300, context),
+                                      height: scrolldata.sc < 2100
+                                          ? 500
+                                          : scrolldata.sc < 2800
+                                              ? 3100 - scrolldata.sc
+                                              : scrolldata.sc >= 3100
+                                                  ? 3400 - scrolldata.sc
+                                                  : 300,
+                                    )),
                                   )),
                               Positioned(
-                                  bottom: scrolldata.sc < 1900
-                                      ? MediaQuery.of(context).size.height -
-                                          (scrolldata.sc - 1700)
-                                      : MediaQuery.of(context).size.height -
-                                          200,
-                                  top: 0,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(
-                                      child: Text('Wash your Hands'))),
+                                  top: 200,
+                                  left: w(300, context),
+                                  child: AnimatedOpacity(
+                                    duration: Duration(milliseconds: 500),
+                                    opacity: scrolldata.sc >= 2700
+                                        ? scrolldata.sc <= 2800
+                                            ? (scrolldata.sc - 2700) / 100
+                                            : scrolldata.sc >= 3100
+                                                ? 0.0
+                                                : scrolldata.sc >= 3100
+                                                    ? (3200 - scrolldata.sc) /
+                                                        100
+                                                    : 1.0
+                                        : 0.0,
+                                    child: Container(
+                                        child: Text('Wash your Hands',
+                                            style: TextStyle(fontSize: 60))),
+                                  )),
                               Positioned(
-                                  bottom: scrolldata.sc < 1900
-                                      ? MediaQuery.of(context).size.height -
-                                          (scrolldata.sc - 1700)
-                                      : MediaQuery.of(context).size.height -
-                                          200,
+                                  top: 300,
+                                  left: w(500, context),
+                                  child: AnimatedOpacity(
+                                    duration: Duration(milliseconds: 500),
+                                    opacity: scrolldata.sc >= 2700
+                                        ? scrolldata.sc <= 2800
+                                            ? (scrolldata.sc - 2700) / 100
+                                            : scrolldata.sc >= 3200
+                                                ? 0.0
+                                                : scrolldata.sc >= 3100
+                                                    ? (3200 - scrolldata.sc) /
+                                                        100
+                                                    : 1.0
+                                        : 0.0,
+                                    child: Container(
+                                        width: 400,
+                                        child: Text(
+                                            'Handwashing is one of the best ways to protect yourself and your family from getting sick.Washing hands can keep you healthy and prevent the spread of respiratory and diarrheal infections from one person to the next. Washing hands with soap and water is the best way to get rid of germs in most situations. If soap and water are not readily available, you can use an alcohol-based hand sanitizer that contains at least 60% alcohol.',
+                                            style: TextStyle(fontSize: 20))),
+                                  )),
+                              Positioned(
+                                  bottom: scrolldata.sc < 3600
+                                      ? -3900 + scrolldata.sc
+                                      : scrolldata.sc >= 3900
+                                          ? -4200 + scrolldata.sc
+                                          : -300,
                                   top: 0,
-                                  left: 0,
+                                  left: scrolldata.sc < 3600
+                                      ? w(-4100 + scrolldata.sc, context)
+                                      : scrolldata.sc >= 3900
+                                          ? w(-4300 + scrolldata.sc, context)
+                                          : w(-500, context),
                                   right: 0,
                                   child: Container(
+                                    child: Center(
+                                        child: new Image.asset(
+                                      'assets/socdist.png',
+                                      width: scrolldata.sc < 3400
+                                          ? w(500, context)
+                                          : scrolldata.sc < 3600
+                                              ? w(3900 - scrolldata.sc, context)
+                                              : scrolldata.sc >= 3900
+                                                  ? w(4200 - scrolldata.sc,
+                                                      context)
+                                                  : w(300, context),
+                                      height: scrolldata.sc < 2900
+                                          ? 500
+                                          : scrolldata.sc < 3600
+                                              ? 3900 - scrolldata.sc
+                                              : scrolldata.sc >= 3900
+                                                  ? 4200 - scrolldata.sc
+                                                  : 300,
+                                    )),
+                                  )),
+                              Positioned(
+                                  top: 200,
+                                  left: w(300, context),
+                                  child: AnimatedOpacity(
+                                    duration: Duration(milliseconds: 500),
+                                    opacity: scrolldata.sc >= 3500
+                                        ? scrolldata.sc <= 3600
+                                            ? (scrolldata.sc - 3500) / 100
+                                            : scrolldata.sc >= 4000
+                                                ? 0.0
+                                                : scrolldata.sc >= 3900
+                                                    ? (4000 - scrolldata.sc) /
+                                                        100
+                                                    : 1.0
+                                        : 0.0,
+                                    child: Container(
+                                        child: Text('Wash your Hands',
+                                            style: TextStyle(fontSize: 60))),
+                                  )),
+                              Positioned(
+                                  top: 300,
+                                  left: w(500, context),
+                                  child: AnimatedOpacity(
+                                    duration: Duration(milliseconds: 500),
+                                    opacity: scrolldata.sc >= 3500
+                                        ? scrolldata.sc <= 3600
+                                            ? (scrolldata.sc - 3500) / 100
+                                            : scrolldata.sc >= 4000
+                                                ? 0.0
+                                                : scrolldata.sc >= 3900
+                                                    ? (4000 - scrolldata.sc) /
+                                                        100
+                                                    : 1.0
+                                        : 0.0,
+                                    child: Container(
+                                        width: 400,
+                                        child: Text(
+                                            'Handwashing is one of the best ways to protect yourself and your family from getting sick.Washing hands can keep you healthy and prevent the spread of respiratory and diarrheal infections from one person to the next. Washing hands with soap and water is the best way to get rid of germs in most situations. If soap and water are not readily available, you can use an alcohol-based hand sanitizer that contains at least 60% alcohol.',
+                                            style: TextStyle(fontSize: 20))),
+                                  )),
+                              Positioned(
+                                width: w(
+                                    MediaQuery.of(context).size.width, context),
+                                top: scrolldata.sc >= 4800
+                                    ? MediaQuery.of(context).size.height - (700)
+                                    : MediaQuery.of(context).size.height -
+                                        (scrolldata.sc - 4100),
+                                child: Image.asset(
+                                  'assets/mask.png',
+                                ),
+                              ),
+                              Positioned(
+                                  top: 50,
+                                  left: w(250, context),
+                                  child: AnimatedOpacity(
+                                      duration: Duration(milliseconds: 500),
+                                      opacity: scrolldata.sc <= 4100
+                                          ? 0.0
+                                          : scrolldata.sc >= 4400
+                                              ? 1.0
+                                              : (scrolldata.sc - 4100) / 300,
                                       child: Text(
-                                          'Handwashing is one of the best ways to protect yourself and your family from getting sick.Washing hands can keep you healthy and prevent the spread of respiratory and diarrheal infections from one person to the next. Washing hands with soap and water is the best way to get rid of germs in most situations. If soap and water are not readily available, you can use an alcohol-based hand sanitizer that contains at least 60% alcohol.'))),
-                              Positioned(
-                                  bottom: scrolldata.sc < 1900
-                                      ? MediaQuery.of(context).size.height -
-                                          (scrolldata.sc - 1700)
-                                      : MediaQuery.of(context).size.height -
-                                          200,
-                                  top: 0,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/socdist.gif'),
-                                            fit: BoxFit.contain)),
-                                  )),
-                              Positioned(
-                                  bottom: scrolldata.sc < 1900
-                                      ? MediaQuery.of(context).size.height -
-                                          (scrolldata.sc - 1700)
-                                      : MediaQuery.of(context).size.height -
-                                          200,
-                                  top: 0,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image:
-                                                AssetImage('assets/hands.gif'),
-                                            fit: BoxFit.contain)),
-                                  )),
+                                        'And Always wear a Mask...',
+                                        style: TextStyle(fontSize: 60),
+                                      )))
                             ],
                           ))
-                      // ColorFiltered(
-                      //   colorFilter: ColorFilter.mode(
-                      //       Colors.black.withOpacity(0.8),
-                      //       BlendMode.srcOut), // This one will create the magic
-                      //   child: Stack(
-                      //     fit: StackFit.expand,
-                      //     children: [
-                      //       Container(
-                      //         height: 900,
-                      //         width: 900,
-                      //         decoration: BoxDecoration(
-                      //             color: Colors.black,
-                      //             backgroundBlendMode: BlendMode
-                      //                 .dstOut), // This one will handle background + difference out
-                      //       ),
-                      //       Container(
-                      //         height: 500,
-                      //         width: 500,
-                      //         decoration: BoxDecoration(
-                      //             color: Colors.red,),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // )
-                      // Center(
-                      //     //     top: 100 + siz * 0.9,
-                      //     //     left: (siz - 200) * 1.25,
-                      //     //     bottom: (siz - 200) / 2,
-                      //     child: Container(
-                      //   // //height: MediaQuery.of(context).size.height,
-                      //   width: 790,
-                      //   height: 500,
-                      //   color: Colors.red,
-                      //   child: Statistics(cases, rec, death,scrolldata.sc),
-                      // )),
-                      // Positioned(
-                      //     top: 100 + siz * 0.9,
-                      //     left: (siz - 200) * 1.25,
-                      //     bottom: (siz - 200) / 2,
-                      //     child: Container(
-                      //       //height: MediaQuery.of(context).size.height,
-                      //       width: 500 - siz > 0 ? 500 - siz : 0,
-                      //       color: Colors.red,
-                      //     )),
-                      // // Positioned(
-                      // //     top: (siz - 300) / 2 <= 0 ? 0 : (siz - 300) / 2,
-                      // //     left: (siz - 300) * 1.25 < 0 ? 0 : (siz - 300) * 1.25,
-                      // //     bottom: (siz - 300) / 2 < 0 ? 0 : (siz - 300) / 2,
-                      // //     child: Container(
-                      // //       //height: MediaQuery.of(context).size.height,
-                      // //       width: siz < 300
-                      // //           ? 0
-                      // //           : (800 - siz) < 0
-                      // //               ? 0
-                      // //               : (800 - siz),
-                      // //       color: Colors.green,
-                      // //     )),
-                      // Positioned(
-                      //     top: (siz - 600) / 2 < 0 ? 0 : (siz - 600) / 2,
-                      //     left: (siz - 600) / 1 < 0 ? 0 : (siz - 600) / 1,
-                      //     bottom: (siz - 600) / 2 < 0 ? 0 : (siz - 600) / 2,
-                      //     child: Container(
-                      //       //height: MediaQuery.of(context).size.height,
-                      //       width: siz < 600
-                      //           ? 0
-                      //           : (1100 - siz) < 0
-                      //               ? 0
-                      //               : (1100 - siz),
-                      //       color: Colors.red,
-                      //     )),
-                      // // Container(
-                      //   color: Colors.green,
-                      //   height: 30,
-                      //   width: size,
-                      // )
                     ],
                   ));
             }),
